@@ -1,5 +1,5 @@
-const canvas = document.getElementById('game')
-const ctx = canvas.getContext('2d')
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
 
 //9) увеличение змейки
 class SnakePart {
@@ -14,11 +14,11 @@ let snakeLength = 2
 
 let speed = 7
 let pixelCount = 20
-let pixelSize = canvas.width/pixelCount - 2
+let pixelSize = canvas.width/pixelCount
 
 //5)направление движения змеи
 let xVelocity = 0
-let yVelocity = 0
+let yVelocity = 0   
 
 //3) стартовая позиция
 let headX = 10
@@ -72,7 +72,6 @@ function drawSnake() {
 //5) меняем направление движения змеи
 document.body.addEventListener('keydown', keyDown)
 function keyDown(e) {
-    console.log(e)
     //up
     if(e.keyCode == 38) {
         if(yVelocity == 1) return
@@ -121,12 +120,17 @@ function appleEat() {
     }
 }
 //12) sound eating
-
 const eat = new Audio('eat.mp3')
 
+// Best score
+let best = localStorage.getItem('bestScore');
+
 //10) game over :(
-    function isGameOver() {
-        let gameOver = false
+    function isGameOver(gameOver) {
+        if(gameOver == false){
+            return
+        } 
+        gameOver = false
         if(yVelocity == 0 && xVelocity ==0) {
             return false
         }
@@ -139,6 +143,9 @@ const eat = new Audio('eat.mp3')
             }
         })
         if(gameOver) {
+            if (score > localStorage.getItem('bestScore')){
+                localStorage.setItem('bestScore', score)
+            }
             ctx.fillStyle = 'white'
             ctx.font = '32px Arial'
             ctx.fillText('Game Over!', canvas.width/3.8, canvas.height/2)
@@ -147,10 +154,33 @@ const eat = new Audio('eat.mp3')
         return gameOver
     }
 
+    // localStorage.clear()
     //11)
     function drawScore() {
-        ctx.fillStyle = 'white'
-        ctx.font = '16px Arial'
-        ctx.fillText('Score: '+score, canvas.width-70, 20)
+        if(localStorage.getItem('bestScore') > 0){
+            let best = localStorage.getItem('bestScore');
+            $('#best-score').text('Best score: '+best)
+        }
+        // Current score
+        $('#score').text('Score: '+score)
     }
-drawGame()
+
+    drawGame()
+$('#button').click(function(){
+    isGameOver(false)
+    yVelocity = 0
+    xVelocity = 1
+    headX = 10
+    headY = 10
+    score = 0
+    speed = 7
+    snakePart = [];
+    snakeLength =2
+    appleX = Math.floor(Math.random()*pixelCount)
+    appleY = Math.floor(Math.random()*pixelCount)
+    xVelocity = 0
+yVelocity = 0
+    drawGame()
+    console.log(localStorage);
+})
+

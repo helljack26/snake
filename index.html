@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,15 +15,65 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            user-select: none;
+        }
+        p{
+            margin: 0;
+            padding: 0;
+        }
+        #score, #best-score{
+            margin-bottom: 5px;
+        }
+        h1{
+            margin-bottom: 0;
+        }
+        #button {
+            outline: none;
+            border: 2px solid tomato;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            background-color: transparent;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        #button:hover{
+            color: whitesmoke;
+            background-color: tomato;
+        }
+        .header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 380px;
+        }
+        .right{
+            text-align: right;
+        }
+        .right p {
+            font-weight: bold;
         }
         canvas {
-            box-shadow:  10px 10px 50px black;
+            box-shadow: 10px 10px 50px black;
         }
     </style>
 </head>
+
 <body>
     <h1>Snake</h1>
+    <div class="header">
+        <div>
+            <button type="button" id="button">Start</button>
+        </div>
+        <div class="right">
+            <p class="header-text" id="score">0</p>
+            <p class="header-text" id="best-score">0</p>
+        </div>
+    </div>
     <canvas id="game" width="400" height="400"></canvas>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./index.js"></script>
 </body>
+
 </html>
