@@ -37,6 +37,7 @@
             background-color: transparent;
             transition: all 0.2s ease-in-out;
             cursor: pointer;
+            margin-bottom: 5px;
         }
         #button:hover{
             color: whitesmoke;
@@ -51,7 +52,7 @@
         .right{
             text-align: right;
         }
-        .right p {
+        .right p, #level, .level {
             font-weight: bold;
         }
         canvas {
@@ -66,9 +67,12 @@
         <div>
             <button type="button" id="button">Start</button>
         </div>
+        <div>
+            <p class="level">Level: <span id="level">1</span></p>
+        </div>
         <div class="right">
             <p class="header-text" id="score">0</p>
-            <p class="header-text" id="best-score">0</p>
+            <p class="header-text" id="best-score"></p>
         </div>
     </div>
     <canvas id="game" width="400" height="400"></canvas>
